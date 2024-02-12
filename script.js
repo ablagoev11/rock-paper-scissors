@@ -1,8 +1,12 @@
-for (let i = 1; i <= 5; i++) {
-  const playersPrompt = prompt("What is you choice: Rock, Paper, Scissors");
-  const playersChoice = processCaseSensitivity(playersPrompt);
-  const computersChoice = getComputerChoice();
-  alert(playRound(playersChoice, computersChoice));
+playGame();
+
+function playGame() {
+  for (let i = 1; i <= 5; i++) {
+    const playersPrompt = prompt("What is you choice: Rock, Paper, Scissors");
+    const playersChoice = processCaseSensitivity(playersPrompt);
+    const computersChoice = getComputerChoice();
+    alert(playRound(playersChoice, computersChoice));
+  }
 }
 
 function getComputerChoice() {
