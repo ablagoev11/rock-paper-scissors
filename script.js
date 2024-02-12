@@ -14,19 +14,26 @@ function getComputerChoice() {
 
 function playRound(playersChoice, computersChoice) {
   alert(`Computer chooses ${computersChoice}`);
-  if (playersChoice === "Rock") {
-    if (computersChoice === "Paper") return "You LOSE!";
-    else if (computersChoice === "Scissors") return "You WIN!";
-    else return "DRAW";
-  } else if (playersChoice === "Paper") {
-    if (computersChoice === "Scissors") return "You LOSE!";
-    else if (computersChoice === "Rock") return "You WIN!";
-    else return "DRAW";
-  } else if (playersChoice === "Scissors") {
-    if (computersChoice === "Rock") return "You LOSE!";
-    else if (computersChoice === "Paper") return "You WIN!";
-    else return "DRAW";
-  } else return "Invalid input!";
+
+  switch (playersChoice) {
+    case "Rock":
+      if (computersChoice === "Paper") return "You LOSE!";
+      else if (computersChoice === "Scissors") return "You WIN!";
+      else return "DRAW";
+      break;
+    case "Paper":
+      if (computersChoice === "Scissors") return "You LOSE!";
+      else if (computersChoice === "Rock") return "You WIN!";
+      else return "DRAW";
+      break;
+    case "Scissors":
+      if (computersChoice === "Rock") return "You LOSE!";
+      else if (computersChoice === "Paper") return "You WIN!";
+      else return "DRAW";
+      break;
+    default:
+      return "Invalid input";
+  }
 }
 
 function processCaseSensitivity(playersChoice) {
