@@ -1,11 +1,34 @@
-playGame();
+let score = 0;
+let scoreComputer = 0;
+const scoreElement = document.querySelector(".score");
+const scoreComputerElement = document.querySelector(".computer-score");
 
-function playGame() {
-  for (let i = 1; i <= 5; i++) {
-    const playersPrompt = prompt("What is you choice: Rock, Paper, Scissors");
-    const playersChoice = processCaseSensitivity(playersPrompt);
-    const computersChoice = getComputerChoice();
-    alert(playRound(playersChoice, computersChoice));
+function incrementScore(element, score) {
+  ++score;
+  element.textContent = `Score : ${score}`;
+  return score;
+}
+
+const buttonsContainerElement = document.querySelector(".buttons");
+const resultElement = document.querySelector(".result");
+const computersChoiceElement = document.querySelector(".computer-choice");
+
+buttonsContainerElement.addEventListener("click", chooseHand);
+
+function chooseHand(e) {
+  let target = e.target;
+  let result = playRound(target.id, getComputerChoice());
+  resultElement.textContent = result;
+  if (result === "You WIN!") score = incrementScore(scoreElement, score);
+  else if (result === "You LOSE!")
+    scoreComputer = incrementScore(scoreComputerElement, scoreComputer);
+  checkGameState();
+}
+
+function checkGameState() {
+  if (score === 5 || scoreComputer === 5) {
+    computersChoiceElement.textContent = "Game Over!";
+    buttonsContainerElement.removeEventListener("click", chooseHand);
   }
 }
 
@@ -17,8 +40,7 @@ function getComputerChoice() {
 }
 
 function playRound(playersChoice, computersChoice) {
-  alert(`Computer chooses ${computersChoice}`);
-
+  computersChoiceElement.textContent = `Computer chooses ${computersChoice}`;
   switch (playersChoice) {
     case "Rock":
       if (computersChoice === "Paper") return "You LOSE!";
@@ -38,11 +60,4 @@ function playRound(playersChoice, computersChoice) {
     default:
       return "Invalid input";
   }
-}
-
-function processCaseSensitivity(playersChoice) {
-  return (
-    playersChoice.charAt(0).toUpperCase() +
-    playersChoice.slice(1, playersChoice.length).toLowerCase()
-  );
 }
